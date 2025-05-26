@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador | AutoParts</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            transition: all 0.3s;
+        }
+        .active-tab {
+            border-left: 4px solid #3b82f6;
+            background-color: #eff6ff;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex h-screen">
+    <!-- Sidebar -->
+    <div class="sidebar bg-white w-64 p-4 shadow-lg">
+        <h1 class="text-2xl font-bold text-blue-800 mb-8">Admin AutoParts</h1>
+        <ul class="space-y-2">
+            <li><button onclick="showTab('dashboard')" class="w-full text-left p-2 rounded hover:bg-blue-50 active-tab">📊 Dashboard</button></li>
+            <li><button onclick="showTab('productos')" class="w-full text-left p-2 rounded hover:bg-blue-50">🛍️ Productos</button></li>
+            <li><button onclick="showTab('ventas')" class="w-full text-left p-2 rounded hover:bg-blue-50">💰 Ventas</button></li>
+            <li><button onclick="showTab('usuarios')" class="w-full text-left p-2 rounded hover:bg-blue-50">👥 Usuarios</button></li>
+            <li><button onclick="showTab('stock')" class="w-full text-left p-2 rounded hover:bg-blue-50">📦 Stock</button></li>
+        </ul>
+        <button class="mt-8 w-full bg-red-500 text-white py-2 rounded hover:bg-red-600">Cerrar sesión</button>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="flex-1 p-8 overflow-y-auto">
+        <!-- Dashboard (Vista inicial) -->
+        <div id="dashboard" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6">Resumen General</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-semibold text-gray-700">Ventas hoy</h3>
+                    <p class="text-3xl font-bold">$1,240,500</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-semibold text-gray-700">Productos bajos en stock</h3>
+                    <p class="text-3xl font-bold text-red-500">8</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-semibold text-gray-700">Usuarios activos</h3>
+                    <p class="text-3xl font-bold">42</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="font-semibold mb-4">Últimas ventas</h3>
+                <table class="min-w-full">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="text-left py-2">ID</th>
+                            <th class="text-left py-2">Cliente</th>
+                            <th class="text-left py-2">Total</th>
+                            <th class="text-left py-2">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-2">#10025</td>
+                            <td class="py-2">Juan Pérez</td>
+                            <td class="py-2">$189,990</td>
+                            <td class="py-2">15/05/2024</td>
+                        </tr>
+                        <!-- Más filas... -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Gestión de Productos -->
+        <div id="productos" class="tab-content hidden">
+            <h2 class="text-2xl font-bold mb-6">Gestión de Productos</h2>
+            <button class="bg-blue-600 text-white px-4 py-2 rounded mb-4 hover:bg-blue-700">➕ Nuevo Producto</button>
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <table class="min-w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left">ID</th>
+                            <th class="px-6 py-3 text-left">Nombre</th>
+                            <th class="px-6 py-3 text-left">Precio</th>
+                            <th class="px-6 py-3 text-left">Categoría</th>
+                            <th class="px-6 py-3 text-left">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200" id="productos-list">
+                        <!-- Los productos se cargarán aquí -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Otras pestañas (Ventas, Usuarios, Stock) con estructura similar -->
+    </div>
+
+    <script>
+        // Funcionalidad básica del panel
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            document.getElementById(tabName).classList.remove('hidden');
+            
+            // Actualizar active tab en sidebar
+            document.querySelectorAll('.sidebar button').forEach(btn => {
+                btn.classList.remove('active-tab');
+            });
+            event.target.classList.add('active-tab');
+        }
+
+        // Ejemplo: Cargar productos (simulado)
+        function cargarProductos() {
+            const productos = [
+                { id: 1, nombre: "Filtro de Aceite", precio: 25990, categoria: "Motores" },
+                { id: 2, nombre: "Pastillas de Freno", precio: 34990, categoria: "Frenos" }
+            ];
+            
+            const tbody = document.getElementById('productos-list');
+            tbody.innerHTML = productos.map(producto => `
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4">${producto.id}</td>
+                    <td class="px-6 py-4">${producto.nombre}</td>
+                    <td class="px-6 py-4">$${producto.precio.toLocaleString('es-CL')}</td>
+                    <td class="px-6 py-4">${producto.categoria}</td>
+                    <td class="px-6 py-4">
+                        <button class="text-blue-600 hover:text-blue-800 mr-2">Editar</button>
+                        <button class="text-red-600 hover:text-red-800">Eliminar</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarProductos();
+        });
+    </script>
+</body>
+</html>

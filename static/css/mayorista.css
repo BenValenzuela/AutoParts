@@ -1,0 +1,170 @@
+/* Variables de color (coherentes con tu tema) */
+:root {
+    --primary: #afbcd6;
+    --primary-dark: #0036cb;
+    --secondary: #f59e0b;
+    --dark: #1e293b;
+    --light: #f8fafc;
+    --gray: #94a3b8;
+    --gray-light: #e2e8f0;
+    --success: #10b981;
+    --danger: #ef4444;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--dark);
+    background-color: var(--light);
+    line-height: 1.6;
+}
+
+/* Navbar (coherente con tu diseño) */
+nav {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    box-shadow: var(--shadow-lg);
+}
+
+nav a {
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Estilos para los productos */
+.producto {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--gray-light);
+}
+
+.producto:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.producto img {
+    transition: transform 0.3s ease;
+}
+
+.producto:hover img {
+    transform: scale(1.05);
+}
+
+/* Botones */
+button, .btn {
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Filtros */
+#filtro {
+    border: 1px solid var(--gray);
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+#filtro:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Carrito flotante */
+#cart-toggle {
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s ease;
+}
+
+#cart-toggle:hover {
+    transform: scale(1.1);
+}
+
+#cart-modal {
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--gray-light);
+}
+
+/* Estilos para el texto */
+h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+h2 {
+    color: var(--primary);
+    margin-bottom: 2rem;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+}
+
+/* Efectos de transición */
+.transition {
+    transition: all 0.3s ease;
+}
+
+/* Estilos para precios */
+.text-2xl {
+    color: var(--primary-dark);
+}
+
+/* Scrollbar personalizada (ya incluida en tu HTML) */
+#cart-items::-webkit-scrollbar {
+    width: 5px;
+}
+#cart-items::-webkit-scrollbar-track {
+    background: var(--gray-light);
+}
+#cart-items::-webkit-scrollbar-thumb {
+    background: var(--gray);
+    border-radius: 10px;
+}
+#cart-items::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    #cart-modal {
+        width: 90vw;
+        right: -10px;
+    }
+}
+

@@ -1,0 +1,41 @@
+/* Estilos comunes */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F3F4F6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #1D4ED8; /* Azul profesional */
+    padding: 20px 0;
+}
+
+.navbar a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.navbar a:hover {
+    color: #D1D5DB;
+}
+
+/* Footer */
+footer {
+    background-color: #1D4ED8;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-size: 0.875rem;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

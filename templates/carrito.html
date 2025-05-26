@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrito de Compras</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+<nav class="bg-blue-900 p-4">
+<div class="max-w-screen-xl mx-auto flex justify-between items-center text-white">
+    <a href="#" class="text-2xl font-bold hover:text-gray-300">AutoParts</a>
+    <a href="login.html" class="hover:text-gray-300">Cerrar sesión</a>
+</div>
+</nav>
+
+<!-- Carrito de Compras -->
+<section class="container mx-auto py-10">
+<h2 class="text-center text-3xl font-bold text-gray-800 mb-12">Carrito de Compras</h2>
+
+<!-- Contenedor de productos en el carrito -->
+<div id="productos-carrito" class="space-y-4">
+    <!-- Productos cargados dinámicamente -->
+</div>
+
+<!-- Resumen de la compra -->
+<div id="resumen-compra" class="mt-6 text-right">
+    <p class="text-lg font-semibold">Total: $<span id="total-compra">0</span></p>
+    <button id="ir-a-pagar" class="mt-4 bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700">Ir a pagar</button>
+</div>
+</section>
+
+<script src="carrito.js"></script>
+</body>
+
+</html>

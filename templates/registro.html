@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - AutoParts Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--dark);
+            background-color: #f1f5f9;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 1.75rem;
+        }
+        
+        .btn-volver {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-volver:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .register-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 2rem;
+        }
+        
+        .register-box {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            border-top: 4px solid var(--primary);
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        .register-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+        
+        .form-group {
+            text-align: left;
+            flex: 1;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn-register {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+        }
+        
+        .btn-register:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .error-text {
+            color: var(--danger);
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+        
+        .success-text {
+            color: var(--success);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .register-footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .register-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .register-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Checkbox styles */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            text-align: left;
+        }
+        
+        .checkbox-input {
+            margin-top: 0.25rem;
+            min-width: 1rem;
+        }
+        
+        .checkbox-label {
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        
+        .checkbox-label a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        .main-footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .register-box {
+                padding: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .register-box {
+                padding: 1.5rem;
+            }
+            
+            .register-title {
+                font-size: 1.75rem;
+            }
+        }
+        
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 90;
+            border: none;
+        }
+        
+        /* Dark theme */
+        [data-theme="dark"] {
+            --dark: #f8fafc;
+            --light: #1e293b;
+            --gray: #64748b;
+        }
+        
+        [data-theme="dark"] body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        
+        [data-theme="dark"] .register-box {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+        }
+        
+        [data-theme="dark"] .form-input {
+            background-color: #1e293b;
+            border-color: #334155;
+            color: white;
+        }
+        
+        [data-theme="dark"] .form-label,
+        [data-theme="dark"] .checkbox-label {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="{{ url_for('index') }}" class="logo">
+                <i class="fas fa-car"></i>
+                <span>AutoParts Pro</span>
+            </a>
+            <nav>
+                <a href="{{ url_for('index') }}" class="btn-volver">
+                    <i class="fas fa-arrow-left"></i>
+                    Volver al Inicio
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="register-container">
+            <div class="register-box">
+                <h2 class="register-title">
+                    <i class="fas fa-user-plus"></i> Crear Cuenta
+                </h2>
+                <form id="register-form" class="register-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" id="nombre" class="form-input" placeholder="Ingresa tu nombre" required>
+                            <div id="nombre-error" class="error-text"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" id="apellido" class="form-input" placeholder="Ingresa tu apellido" required>
+                            <div id="apellido-error" class="error-text"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="correo" class="form-label">Correo electrónico</label>
+                        <input type="email" id="correo" class="form-input" placeholder="tucorreo@ejemplo.com" required>
+                        <div id="correo-error" class="error-text"></div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contrasena" class="form-label">Contraseña</label>
+                            <input type="password" id="contrasena" class="form-input" placeholder="Crea una contraseña" required>
+                            <div id="contrasena-error" class="error-text"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmar-contrasena" class="form-label">Confirmar Contraseña</label>
+                            <input type="password" id="confirmar-contrasena" class="form-input" placeholder="Repite tu contraseña" required>
+                            <div id="confirmar-error" class="error-text"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono" class="form-label">Teléfono (Opcional)</label>
+                        <input type="tel" id="telefono" class="form-input" placeholder="+56 9 1234 5678">
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terminos" class="checkbox-input" required>
+                        <label for="terminos" class="checkbox-label">
+                            Acepto los <a href="#">Términos y Condiciones</a> y la <a href="#">Política de Privacidad</a> de AutoParts Pro
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter" class="checkbox-input">
+                        <label for="newsletter" class="checkbox-label">
+                            Deseo recibir ofertas y novedades por correo electrónico
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-register">
+                        <i class="fas fa-user-check"></i> Registrarse
+                    </button>
+                    
+                    <!-- Mensajes de estado -->
+                    <div id="success-msg" class="success-text"></div>
+                    <div id="error-msg" class="error-text"></div>
+                    
+                    <div class="register-footer">
+                        <a href="{{ url_for('login') }}">Inicia sesión aquí</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <p>&copy; 2025 AutoParts Pro. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Lógica del registro -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-theme', newTheme);
+            
+            // Update icon
+            const icon = themeToggle.querySelector('i');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            
+            // Save preference to localStorage
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-theme', savedTheme);
+        const icon = themeToggle.querySelector('i');
+        icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        
+        // Register form handling
+        const registerForm = document.getElementById('register-form');
+        const errorMsg = document.getElementById('error-msg');
+        const successMsg = document.getElementById('success-msg');
+        
+        // Function to validate email
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(String(email).toLowerCase());
+        }
+        
+        // Function to validate password
+        function validatePassword(password) {
+            return password.length >= 8;
+        }
+        
+        // Function to show error
+        function showError(element, message) {
+            const errorElement = document.getElementById(`${element}-error`);
+            errorElement.textContent = message;
+            document.getElementById(element).classList.add('error-border');
+        }
+        
+        // Function to clear error
+        function clearError(element) {
+            const errorElement = document.getElementById(`${element}-error`);
+            errorElement.textContent = '';
+            document.getElementById(element).classList.remove('error-border');
+        }
+        
+        // Add error border class to CSS
+        const style = document.createElement('style');
+        style.textContent = '.error-border { border-color: var(--danger) !important; }';
+        document.head.appendChild(style);
+        
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset messages
+            errorMsg.textContent = '';
+            successMsg.textContent = '';
+            
+            // Get form values
+            const nombre = document.getElementById('nombre').value.trim();
+            const apellido = document.getElementById('apellido').value.trim();
+            const correo = document.getElementById('correo').value.trim();
+            const contrasena = document.getElementById('contrasena').value;
+            const confirmarContrasena = document.getElementById('confirmar-contrasena').value;
+            const telefono = document.getElementById('telefono').value.trim();
+            const tipoCuenta = document.getElementById('tipo-cuenta').value;
+            const terminos = document.getElementById('terminos').checked;
+            
+            // Clear previous errors
+            clearError('nombre');
+            clearError('apellido');
+            clearError('correo');
+            clearError('contrasena');
+            clearError('confirmar-contrasena');
+            
+            // Validate form
+            let isValid = true;
+            
+            if (!nombre) {
+                showError('nombre', 'Por favor ingresa tu nombre');
+                isValid = false;
+            }
+            
+            if (!apellido) {
+                showError('apellido', 'Por favor ingresa tu apellido');
+                isValid = false;
+            }
+            
+            if (!correo) {
+                showError('correo', 'Por favor ingresa tu correo electrónico');
+                isValid = false;
+            } else if (!validateEmail(correo)) {
+                showError('correo', 'Por favor ingresa un correo electrónico válido');
+                isValid = false;
+            }
+            
+            if (!contrasena) {
+                showError('contrasena', 'Por favor crea una contraseña');
+                isValid = false;
+            } else if (!validatePassword(contrasena)) {
+                showError('contrasena', 'La contraseña debe tener al menos 8 caracteres');
+                isValid = false;
+            }
+            
+            if (!confirmarContrasena) {
+                showError('confirmar-contrasena', 'Por favor confirma tu contraseña');
+                isValid = false;
+            } else if (contrasena !== confirmarContrasena) {
+                showError('confirmar-contrasena', 'Las contraseñas no coinciden');
+                isValid = false;
+            }
+            
+            if (!tipoCuenta) {
+                errorMsg.textContent = 'Por favor selecciona un tipo de cuenta';
+                isValid = false;
+            }
+            
+            if (!terminos) {
+                errorMsg.textContent = 'Debes aceptar los términos y condiciones';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                return;
+            }
+            
+            // Here you would typically send the data to your server
+            const formData = {
+                nombre,
+                apellido,
+                correo,
+                contrasena,
+                telefono,
+                tipoCuenta
+            };
+            
+            console.log('Registration data:', formData);
+            
+            // Simulate successful registration
+            setTimeout(() => {
+                // Show success message
+                successMsg.textContent = '¡Registro exitoso! Redirigiendo...';
+                
+                // Clear form
+                registerForm.reset();
+                
+                // Redirect to login after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            }, 1000);
+        });
+        
+        // Real-time validation
+        document.getElementById('contrasena').addEventListener('input', function() {
+            const password = this.value;
+            if (password && !validatePassword(password)) {
+                showError('contrasena', 'La contraseña debe tener al menos 8 caracteres');
+            } else {
+                clearError('contrasena');
+            }
+        });
+        
+        document.getElementById('confirmar-contrasena').addEventListener('input', function() {
+            const confirmPassword = this.value;
+            const password = document.getElementById('contrasena').value;
+            
+            if (confirmPassword && password !== confirmPassword) {
+                showError('confirmar-contrasena', 'Las contraseñas no coinciden');
+            } else {
+                clearError('confirmar-contrasena');
+            }
+        });
+    </script>
+</body>
+</html>
